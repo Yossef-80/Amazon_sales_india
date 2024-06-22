@@ -55,11 +55,11 @@ else:
 
 
 
-    sales_fig = px.line(aggregated_df, x='Date', y='Amount', title='Sales Over Time')
+   # sales_fig = px.line(aggregated_df, x='Date', y='Amount', title='Sales Over Time')
 
-    sales_fig.update_layout( title='Sales Over Time', xaxis_title='Category',
-    yaxis_title='Size',)
-    st.plotly_chart(sales_fig)
+   # sales_fig.update_layout( title='Sales Over Time', xaxis_title='Category',
+   # yaxis_title='Size',)
+  #  st.plotly_chart(sales_fig)
     st.divider()
     col1, col2 = st.columns(2)
     with col1:
