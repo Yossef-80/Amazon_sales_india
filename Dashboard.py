@@ -55,11 +55,11 @@ else:
 
 
 
-   # sales_fig = px.line(aggregated_df, x='Date', y='Amount', title='Sales Over Time')
+    sales_fig = px.line(aggregated_df, x='Date', y='Amount', title='Sales Over Time')
 
-   # sales_fig.update_layout( title='Sales Over Time', xaxis_title='Category',
-   # yaxis_title='Size',)
-  #  st.plotly_chart(sales_fig)
+    sales_fig.update_layout( title='Sales Over Time', xaxis_title='Date',
+    yaxis_title='Amount',)
+    st.plotly_chart(sales_fig)
     st.divider()
     col1, col2 = st.columns(2)
     with col1:
@@ -70,7 +70,7 @@ else:
             category_bar = px.bar(filtered_df.groupby('Category').agg({'Amount': 'sum'}).reset_index(),
                                   x='Category', y='Amount', title='Amount by Category')
             category_bar.update_layout( title='Amount by Category', xaxis_title='Category',
-    yaxis_title='Size',)
+    yaxis_title='Amount',)
             st.plotly_chart(category_bar)
 
 
@@ -82,8 +82,7 @@ else:
         else:
             status_pie = px.pie(df, names='Status', title='Status Distribution')
 
-            status_pie.update_layout(title='Status Distribution', xaxis_title='Category',
-    yaxis_title='Size',)
+            status_pie.update_layout(title='Status Distribution',)
             st.plotly_chart(status_pie)
 
         # Filter the dataframe based on the selected date range
@@ -103,8 +102,8 @@ else:
     with col3:
         amount_hist = px.histogram(filtered_df, x='Amount', nbins=20, title='Distribution of Amount')
 
-        amount_hist.update_layout( title='Distribution of Amount', xaxis_title='Category',
-    yaxis_title='Size',)
+        amount_hist.update_layout( title='Distribution of Amount', xaxis_title='Amount',
+    yaxis_title='count',)
         st.plotly_chart(amount_hist)
 
     with col4:
@@ -114,14 +113,14 @@ else:
                          title='Top 5 Ship-States by Amount',
                          labels={'ship-service-level': 'Ship-State', 'Amount': 'Total Amount'})
 
-        bar_fig.update_layout(title='Top 5 Ship-States by Amount', xaxis_title='Category',
-    yaxis_title='Size',)
+        bar_fig.update_layout(title='Top 5 Ship-States by Amount', xaxis_title='ship-state',
+    yaxis_title='Amount',)
         st.plotly_chart(bar_fig)
 
     amount_box = px.box(filtered_df, x='Status', y='Amount', title='Amount by Status')
 
-    amount_box.update_layout(title='Amount by Status', xaxis_title='Category',
-    yaxis_title='Size',)
+    amount_box.update_layout(title='Amount by Status', xaxis_title='Status',
+    yaxis_title='Amount',)
     st.plotly_chart(amount_box)
     st.divider()
 
@@ -134,8 +133,7 @@ else:
                             title='Heatmap: Ship-State vs Size in Amount',
                             color_continuous_scale='Viridis')
 
-    heatmap_fig.update_layout(title='Heatmap: Ship-State vs Size in Amount', xaxis_title='Category',
-    yaxis_title='Size',)
+    heatmap_fig.update_layout(title='Heatmap: Ship-State vs Size in Amount',)
     st.plotly_chart(heatmap_fig)
     st.divider()
 
@@ -148,6 +146,5 @@ else:
                             title='Heatmap: Category vs Size in Amount',
                             color_continuous_scale='Viridis')
 
-    heatmap_fig2.update_layout(title='Heatmap: Category vs Size in Amount', xaxis_title='Category',
-    yaxis_title='Size',)
+    heatmap_fig2.update_layout(title='Heatmap: Category vs Size in Amount',)
     st.plotly_chart(heatmap_fig2)
