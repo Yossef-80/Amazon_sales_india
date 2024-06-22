@@ -57,6 +57,7 @@ else:
 
     sales_fig = px.line(aggregated_df, x='Date', y='Amount', title='Sales Over Time')
     st.plotly_chart(sales_fig)
+    sales_fig.update_layout( title='Sales Over Time')
     st.divider()
     col1, col2 = st.columns(2)
     with col1:
@@ -67,6 +68,7 @@ else:
             category_bar = px.bar(filtered_df.groupby('Category').agg({'Amount': 'sum'}).reset_index(),
                                   x='Category', y='Amount', title='Amount by Category')
             st.plotly_chart(category_bar)
+            category_bar.update_layout( title='Amount by Category')
 
     # Quantity over time
     with col2:
@@ -76,6 +78,7 @@ else:
         else:
             status_pie = px.pie(df, names='Status', title='Status Distribution')
             st.plotly_chart(status_pie)
+            status_pie.update_layout(title='Status Distribution')
 
         # Filter the dataframe based on the selected date range
     col3, col4 = st.columns(2)
@@ -94,6 +97,7 @@ else:
     with col3:
         amount_hist = px.histogram(filtered_df, x='Amount', nbins=20, title='Distribution of Amount')
         st.plotly_chart(amount_hist)
+        amount_hist.update_layout( title='Distribution of Amount')
 
     with col4:
         ship_state_amount = filtered_df.groupby('ship-state').agg({'Amount': 'sum'}).reset_index()
@@ -102,10 +106,11 @@ else:
                          title='Top 5 Ship-States by Amount',
                          labels={'ship-service-level': 'Ship-State', 'Amount': 'Total Amount'})
         st.plotly_chart(bar_fig)
+        bar_fig.update_layout(title='Top 5 Ship-States by Amount')
 
     amount_box = px.box(filtered_df, x='Status', y='Amount', title='Amount by Status')
     st.plotly_chart(amount_box)
-
+    amount_box.update_layout(title='Amount by Status')
     st.divider()
 
     ship_state_size_amount = filtered_df.groupby(['ship-state', 'Size']).agg({'Amount': 'sum'}).reset_index()
@@ -117,6 +122,7 @@ else:
                             title='Heatmap: Ship-State vs Size in Amount',
                             color_continuous_scale='Viridis')
     st.plotly_chart(heatmap_fig)
+    heatmap_fig.update_layout(title='Heatmap: Ship-State vs Size in Amount')
     st.divider()
 
     ship_state_category_amount = filtered_df.groupby(['ship-state', 'Category']).agg({'Amount': 'sum'}).reset_index()
@@ -128,3 +134,4 @@ else:
                             title='Heatmap: Category vs Size in Amount',
                             color_continuous_scale='Viridis')
     st.plotly_chart(heatmap_fig2)
+    heatmap_fig2.update_layout(title='Heatmap: Category vs Size in Amount')
